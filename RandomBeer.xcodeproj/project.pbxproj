@@ -15,6 +15,10 @@
 		C288CE0527706CE800F519CE /* RandomBeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE0427706CE800F519CE /* RandomBeerTests.swift */; };
 		C288CE0F27706CE900F519CE /* RandomBeerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE0E27706CE900F519CE /* RandomBeerUITests.swift */; };
 		C288CE1127706CE900F519CE /* RandomBeerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE1027706CE900F519CE /* RandomBeerUITestsLaunchTests.swift */; };
+		C288CE2127707BCD00F519CE /* BeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE2027707BCD00F519CE /* BeerModel.swift */; };
+		C288CE2327707C1200F519CE /* beers.json in Resources */ = {isa = PBXBuildFile; fileRef = C288CE2227707C1200F519CE /* beers.json */; };
+		C288CE2B27708D9700F519CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C288CE2A27708D9700F519CE /* SnapKit */; };
+		C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE2D2770912D00F519CE /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,9 @@
 		C288CE0A27706CE900F519CE /* RandomBeerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandomBeerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C288CE0E27706CE900F519CE /* RandomBeerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomBeerUITests.swift; sourceTree = "<group>"; };
 		C288CE1027706CE900F519CE /* RandomBeerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomBeerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C288CE2027707BCD00F519CE /* BeerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerModel.swift; sourceTree = "<group>"; };
+		C288CE2227707C1200F519CE /* beers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = beers.json; sourceTree = "<group>"; };
+		C288CE2D2770912D00F519CE /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C288CE2B27708D9700F519CE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,10 +105,13 @@
 		C288CDEC27706CE500F519CE /* RandomBeer */ = {
 			isa = PBXGroup;
 			children = (
+				C288CE2C2770911100F519CE /* View */,
+				C288CE1F27707BC000F519CE /* Model */,
 				C288CE1E27706D1D00F519CE /* Controller */,
 				C288CE1D27706D0E00F519CE /* Resource */,
 				C288CDF827706CE800F519CE /* LaunchScreen.storyboard */,
 				C288CDFB27706CE800F519CE /* Info.plist */,
+				C288CE2227707C1200F519CE /* beers.json */,
 			);
 			path = RandomBeer;
 			sourceTree = "<group>";
@@ -140,6 +151,22 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		C288CE1F27707BC000F519CE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C288CE2027707BCD00F519CE /* BeerModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C288CE2C2770911100F519CE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C288CE2D2770912D00F519CE /* HeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,6 +183,9 @@
 			dependencies = (
 			);
 			name = RandomBeer;
+			packageProductDependencies = (
+				C288CE2A27708D9700F519CE /* SnapKit */,
+			);
 			productName = RandomBeer;
 			productReference = C288CDEA27706CE500F519CE /* RandomBeer.app */;
 			productType = "com.apple.product-type.application";
@@ -228,6 +258,9 @@
 				Base,
 			);
 			mainGroup = C288CDE127706CE500F519CE;
+			packageReferences = (
+				C288CE2927708D9700F519CE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C288CDEB27706CE500F519CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,6 +279,7 @@
 			files = (
 				C288CDFA27706CE800F519CE /* LaunchScreen.storyboard in Resources */,
 				C288CDF727706CE800F519CE /* Assets.xcassets in Resources */,
+				C288CE2327707C1200F519CE /* beers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +304,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */,
 				C288CDF227706CE500F519CE /* ViewController.swift in Sources */,
+				C288CE2127707BCD00F519CE /* BeerModel.swift in Sources */,
 				C288CDEE27706CE500F519CE /* AppDelegate.swift in Sources */,
 				C288CDF027706CE500F519CE /* SceneDelegate.swift in Sources */,
 			);
@@ -626,6 +662,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C288CE2927708D9700F519CE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C288CE2A27708D9700F519CE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C288CE2927708D9700F519CE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C288CDE227706CE500F519CE /* Project object */;
 }
