@@ -20,18 +20,20 @@ class ViewController: UIViewController {
         "Tokyo",
         "Busan",
         "Suwon",
-        "Guro"
+        "Guro",
+        "Inchon",
+        "Daegu",
+        "Gwangju",
+        "Mockpo",
+        "Daejeon",
+        "GwangMyeong"
     ]
     
     
     //MARK: UI
     
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0,
-                                                  y: 0,
-                                                  width: view.frame.size.width,
-                                                  height: view.frame.size.height),
-                                    style: .plain)
+        let tableView = UITableView()
         return tableView
     }()
     
@@ -43,8 +45,16 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        
         tableView.frame = view.bounds
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        let header = HeaderView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: view.frame.size.width,
+                                              height: view.frame.size.width))
+        header.imageView.image = UIImage(named: "IMG")
+        tableView.tableHeaderView = header
         
     }
     
@@ -57,14 +67,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .magenta
         tableViewConfig()
         tableView.backgroundColor = .green
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-        let header = HeaderView(frame: CGRect(x: 0,
-                                              y: 0,
-                                              width: view.frame.size.width,
-                                              height: view.frame.size.width))
-        
-        tableView.tableHeaderView = header
+
     }
 
 
@@ -87,5 +90,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ViewController: UIScrollViewDelegate {
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let header = tableView.tableHeaderView as? HeaderView else {
+            return
+        }
+        header.scrollViewDidScroll(scrollView: scrollView)
+    }
 }

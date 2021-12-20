@@ -10,65 +10,68 @@ import SnapKit
 
 class HeaderView: UIView {
     
-    let containerView = UIView()
-    let image = UIImageView(image: UIImage(systemName: "star"))
-    let nameLabel = UILabel()
-    let descriptionLabel = UILabel()
-    let styleLabel = UILabel()
+    var imageViewHeight = NSLayoutConstraint()
+    var imageViewBottom = NSLayoutConstraint()
+    var containerViewHeight = NSLayoutConstraint()
     
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
-
     
-    private var imageViewBottom: Constraint!
-    private var imageViewHeight: Constraint!
-    private var containerViewHeight: Constraint!
+    var containerView: UIView!
+    var imageView: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        UIConfigration()
-        self.backgroundColor = .darkGray
+        
+        createViews()
+        
+        setViewConstraints()
+        
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-
     
-    func UIConfigration() {
-        addSubview(containerView)
-        containerView.addSubview(image)
-        image.contentMode = .scaleAspectFill
+    func createViews() {
+        // Container View
+        containerView = UIView()
+        self.addSubview(containerView)
         
-        self.snp.makeConstraints { make in
-            make.width.equalTo(containerView.snp.width)
-            make.centerX.equalTo(containerView.snp.centerX)
-            make.height.equalTo(containerView.snp.height)
-        }
+        // ImageView for background
+        imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .yellow
+        imageView.contentMode = .scaleAspectFill
+        containerView.addSubview(imageView)
+    }
+    
+    func setViewConstraints() {
+        // UIView Constraints
+        NSLayoutConstraint.activate([
+            self.widthAnchor.constraint(equalTo: containerView.widthAnchor),
+            self.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            self.heightAnchor.constraint(equalTo: containerView.heightAnchor)
+        ])
         
-        containerView.snp.makeConstraints { make in
-            containerViewHeight = make.height.equalToSuperview().constraint
-//            containerViewHeight.isActive = true
-        }
+        // Container View Constraints
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         
+        containerView.widthAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+        containerViewHeight = containerView.heightAnchor.constraint(equalTo: self.heightAnchor)
+        containerViewHeight.isActive = true
         
-        image.snp.makeConstraints { make in
-            
-            imageViewBottom = make.bottom.equalToSuperview().constraint
-//            imageViewBottom.isActive = true
-            
-            imageViewHeight = make.height.equalToSuperview().constraint
-//            imageViewHeight.isActive = true
-        }
-        
-        
+        // ImageView Constraints
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageViewBottom = imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        imageViewBottom.isActive = true
+        imageViewHeight = imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor)
+        imageViewHeight.isActive = true
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-//        containerViewHeight.off = scrollView.contentInset.top
-//        let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
-//        containerView.clipsToBounds = offsetY <= 0
-//        imageViewBottom.constant = offsetY >= 0 ? 0 : -offsetY / 2
-//        imageViewHeight.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
+        containerViewHeight.constant = scrollView.contentInset.top
+        let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
+        containerView.clipsToBounds = offsetY <= 0
+        imageViewBottom.constant = offsetY >= 0 ? 0 : -offsetY / 2
+        imageViewHeight.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
     }
 }

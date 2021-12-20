@@ -19,6 +19,8 @@
 		C288CE2327707C1200F519CE /* beers.json in Resources */ = {isa = PBXBuildFile; fileRef = C288CE2227707C1200F519CE /* beers.json */; };
 		C288CE2B27708D9700F519CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C288CE2A27708D9700F519CE /* SnapKit */; };
 		C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE2D2770912D00F519CE /* HeaderView.swift */; };
+		C288CE302770DB5D00F519CE /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE2F2770DB5D00F519CE /* OverView.swift */; };
+		C288CE322770DE2C00F519CE /* OverViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE312770DE2C00F519CE /* OverViewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		C288CE2027707BCD00F519CE /* BeerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerModel.swift; sourceTree = "<group>"; };
 		C288CE2227707C1200F519CE /* beers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = beers.json; sourceTree = "<group>"; };
 		C288CE2D2770912D00F519CE /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		C288CE2F2770DB5D00F519CE /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		C288CE312770DE2C00F519CE /* OverViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				C288CE2D2770912D00F519CE /* HeaderView.swift */,
+				C288CE2F2770DB5D00F519CE /* OverView.swift */,
+				C288CE312770DE2C00F519CE /* OverViewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,10 +310,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C288CE322770DE2C00F519CE /* OverViewTableViewCell.swift in Sources */,
 				C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */,
 				C288CDF227706CE500F519CE /* ViewController.swift in Sources */,
 				C288CE2127707BCD00F519CE /* BeerModel.swift in Sources */,
 				C288CDEE27706CE500F519CE /* AppDelegate.swift in Sources */,
+				C288CE302770DB5D00F519CE /* OverView.swift in Sources */,
 				C288CDF027706CE500F519CE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
