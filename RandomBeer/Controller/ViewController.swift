@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                                               height: view.frame.size.width))
         header.imageView.image = UIImage(named: "IMG")
         tableView.tableHeaderView = header
-        
+        tableView.register(OverViewTableViewCell.self, forCellReuseIdentifier: OverViewTableViewCell.reuseIdentifier)
     }
     
     
@@ -80,11 +80,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = model[indexPath.row]
-        
-        return cell
+        switch indexPath.row {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: OverViewTableViewCell.reuseIdentifier, for: indexPath) as? OverViewTableViewCell else {
+                print("변환 실패 ㅠㅠ")
+                return UITableViewCell()
+            }
+            print("변환성공")
+            cell.nameLabel.text = "제목입니다."
+            cell.tagLabel.text = "종류입니다."
+            cell.descriptionLabel.text = "설명입니다."
+            
+            
+            
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = model[indexPath.row]
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return UITableView.automaticDimension
+        default:
+            return 50
+        }
     }
     
 }
