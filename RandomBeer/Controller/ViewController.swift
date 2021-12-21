@@ -90,8 +90,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = "제목입니다."
             cell.tagLabel.text = "종류입니다."
             cell.descriptionLabel.text = "설명입니다."
-            
-            
+            cell.layer.zPosition = 100
+            cell.delegate = self
+            tableView.layer.zPosition = 0
             
             return cell
         default:
@@ -118,5 +119,11 @@ extension ViewController: UIScrollViewDelegate {
             return
         }
         header.scrollViewDidScroll(scrollView: scrollView)
+    }
+}
+
+extension ViewController: Foldable {
+    func spreadOrFold() {
+        print("fold")
     }
 }

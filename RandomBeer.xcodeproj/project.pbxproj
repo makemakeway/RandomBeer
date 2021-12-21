@@ -21,6 +21,7 @@
 		C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE2D2770912D00F519CE /* HeaderView.swift */; };
 		C288CE322770DE2C00F519CE /* OverViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE312770DE2C00F519CE /* OverViewTableViewCell.swift */; };
 		C288CE802771CABE00F519CE /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE7F2771CABE00F519CE /* UITableViewCell+Extension.swift */; };
+		C288CE852772243E00F519CE /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CE842772243E00F519CE /* Foldable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		C288CE2D2770912D00F519CE /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		C288CE312770DE2C00F519CE /* OverViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverViewTableViewCell.swift; sourceTree = "<group>"; };
 		C288CE7F2771CABE00F519CE /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		C288CE842772243E00F519CE /* Foldable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foldable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		C288CDEC27706CE500F519CE /* RandomBeer */ = {
 			isa = PBXGroup;
 			children = (
+				C288CE832772230F00F519CE /* Protocol */,
 				C288CE7E2771CAAF00F519CE /* Extension */,
 				C288CE2C2770911100F519CE /* View */,
 				C288CE1F27707BC000F519CE /* Model */,
@@ -179,6 +182,14 @@
 				C288CE7F2771CABE00F519CE /* UITableViewCell+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		C288CE832772230F00F519CE /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C288CE842772243E00F519CE /* Foldable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +331,7 @@
 			files = (
 				C288CE322770DE2C00F519CE /* OverViewTableViewCell.swift in Sources */,
 				C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */,
+				C288CE852772243E00F519CE /* Foldable.swift in Sources */,
 				C288CDF227706CE500F519CE /* ViewController.swift in Sources */,
 				C288CE802771CABE00F519CE /* UITableViewCell+Extension.swift in Sources */,
 				C288CE2127707BCD00F519CE /* BeerModel.swift in Sources */,

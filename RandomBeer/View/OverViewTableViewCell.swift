@@ -22,18 +22,24 @@ class OverViewTableViewCell: UITableViewCell {
     var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "이름"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     var tagLabel: UILabel = {
         let label = UILabel()
         label.text = "태그"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
     
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "설명"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
@@ -49,9 +55,27 @@ class OverViewTableViewCell: UITableViewCell {
         return label
     }()
     
+    var moreButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("More", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.backgroundColor = .systemBlue
+        return button
+    }()
+    
+    var delegate: Foldable?
+    
+    @objc func moreButtonClicked(_ sender: UIButton) {
+        if let delegate = delegate {
+            delegate.spreadOrFold()
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setUI()
+        moreButton.addTarget(self, action: #selector(moreButtonClicked(_:)), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -60,8 +84,6 @@ class OverViewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("----------awakeFromNib----------")
-        setUI()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -79,40 +101,39 @@ class OverViewTableViewCell: UITableViewCell {
         contentView.layer.shadowRadius = 10
         contentView.layer.shadowOpacity = 0.7
         
-        containerView.backgroundColor = .darkGray
-        
         containerView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(-200)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview()
         }
         
         let vstack = UIStackView()
-        vstack.alignment = .center
+        vstack.alignment = .fill
         vstack.axis = .vertical
         vstack.spacing = 20
         vstack.distribution = .fill
-        vstack.backgroundColor = .systemTeal
         
         containerView.addSubview(vstack)
+        containerView.backgroundColor = .white
         
         vstack.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        let padding = UIView()
-        padding.snp.makeConstraints { make in
-            make.height.equalTo(0)
+        moreButton.snp.makeConstraints { make in
+            make.height.equalTo(60)
         }
         
         let spacer = UIView()
-        spacer.setContentHuggingPriority(.required, for: .vertical)
+        spacer.setContentHuggingPriority(.defaultLow, for: .vertical)
         
-        vstack.addArrangedSubview(padding)
+        vstack.addArrangedSubview(UIView())
         vstack.addArrangedSubview(nameLabel)
-        vstack.addArrangedSubview(descriptionLabel)
         vstack.addArrangedSubview(tagLabel)
+        vstack.addArrangedSubview(descriptionLabel)
         vstack.addArrangedSubview(spacer)
+        vstack.addArrangedSubview(moreButton)
+        vstack.addArrangedSubview(UIView())
     }
 }
