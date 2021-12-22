@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C26786FD27736D9300BF243D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26786FC27736D9300BF243D /* MainView.swift */; };
+		C26786FF2773714B00BF243D /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26786FE2773714B00BF243D /* CustomTableView.swift */; };
+		C26787022773781300BF243D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C26787012773781300BF243D /* Alamofire */; };
 		C288CDEE27706CE500F519CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CDED27706CE500F519CE /* AppDelegate.swift */; };
 		C288CDF027706CE500F519CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CDEF27706CE500F519CE /* SceneDelegate.swift */; };
 		C288CDF227706CE500F519CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C288CDF127706CE500F519CE /* ViewController.swift */; };
@@ -42,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C26786FC27736D9300BF243D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C26786FE2773714B00BF243D /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		C288CDEA27706CE500F519CE /* RandomBeer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomBeer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C288CDED27706CE500F519CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C288CDEF27706CE500F519CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C288CE2B27708D9700F519CE /* SnapKit in Frameworks */,
+				C26787022773781300BF243D /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +178,8 @@
 			children = (
 				C288CE2D2770912D00F519CE /* HeaderView.swift */,
 				C288CE312770DE2C00F519CE /* OverViewTableViewCell.swift */,
+				C26786FC27736D9300BF243D /* MainView.swift */,
+				C26786FE2773714B00BF243D /* CustomTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 			name = RandomBeer;
 			packageProductDependencies = (
 				C288CE2A27708D9700F519CE /* SnapKit */,
+				C26787012773781300BF243D /* Alamofire */,
 			);
 			productName = RandomBeer;
 			productReference = C288CDEA27706CE500F519CE /* RandomBeer.app */;
@@ -285,6 +294,7 @@
 			mainGroup = C288CDE127706CE500F519CE;
 			packageReferences = (
 				C288CE2927708D9700F519CE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C26787002773781300BF243D /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = C288CDEB27706CE500F519CE /* Products */;
 			projectDirPath = "";
@@ -329,7 +339,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26786FF2773714B00BF243D /* CustomTableView.swift in Sources */,
 				C288CE322770DE2C00F519CE /* OverViewTableViewCell.swift in Sources */,
+				C26786FD27736D9300BF243D /* MainView.swift in Sources */,
 				C288CE2E2770912D00F519CE /* HeaderView.swift in Sources */,
 				C288CE852772243E00F519CE /* Foldable.swift in Sources */,
 				C288CDF227706CE500F519CE /* ViewController.swift in Sources */,
@@ -692,6 +704,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C26787002773781300BF243D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		C288CE2927708D9700F519CE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -703,6 +723,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C26787012773781300BF243D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C26787002773781300BF243D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		C288CE2A27708D9700F519CE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C288CE2927708D9700F519CE /* XCRemoteSwiftPackageReference "SnapKit" */;

@@ -13,7 +13,7 @@ struct BeerModel: Codable {
     let tag: String
     let description: String
     let imageUrl: String
-    let pairingFood: String
+    let pairingFood: [String]
     let tips: String
     
     enum CodingKeys: String, CodingKey {
