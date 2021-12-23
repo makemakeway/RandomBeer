@@ -18,17 +18,6 @@ class HeaderView: UIView {
     var containerView: UIView!
     var imageView: UIImageView!
     
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
-        let hitView = super.hitTest(point, with: event)
-        if (hitView == self) {
-            print("HEADERVIEW HIT")
-            return nil
-        }
-//        print(hitView)
-        return hitView
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -50,8 +39,7 @@ class HeaderView: UIView {
         // ImageView for background
         imageView = UIImageView()
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .yellow
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         containerView.addSubview(imageView)
     }
     

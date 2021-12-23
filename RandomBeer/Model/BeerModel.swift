@@ -12,7 +12,7 @@ struct BeerModel: Codable {
     let id: Int
     let tag: String
     let description: String
-    let imageUrl: String
+    let imageUrl: String?
     let pairingFood: [String]
     let tips: String
     

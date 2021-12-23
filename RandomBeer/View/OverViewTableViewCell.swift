@@ -43,23 +43,11 @@ class OverViewTableViewCell: UITableViewCell {
         return label
     }()
     
-    var pairingFoodLabel: UILabel = {
-        let label = UILabel()
-        label.text = "어울리는 음식"
-        return label
-    }()
-    
-    var tipsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "꿀팁"
-        return label
-    }()
     
     var moreButton: UIButton = {
         let button = UIButton()
         button.setTitle("More", for: .normal)
         button.setTitleColor(.label, for: .normal)
-        button.backgroundColor = .systemBlue
         return button
     }()
     
@@ -118,7 +106,10 @@ class OverViewTableViewCell: UITableViewCell {
         containerView.backgroundColor = .white
         
         vstack.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
         
         moreButton.snp.makeConstraints { make in
@@ -135,5 +126,8 @@ class OverViewTableViewCell: UITableViewCell {
         vstack.addArrangedSubview(spacer)
         vstack.addArrangedSubview(moreButton)
         vstack.addArrangedSubview(UIView())
+        
+        
+        
     }
 }
