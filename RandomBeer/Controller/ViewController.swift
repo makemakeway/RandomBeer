@@ -34,10 +34,14 @@ class ViewController: UIViewController {
         return header
     }()
     
-    var footerBar: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.backgroundColor = .magenta
-        return toolbar
+    var footerView: UIStackView = {
+        let view = UIStackView()
+        view.backgroundColor = .white
+        view.axis = .horizontal
+        view.spacing = 20
+        view.distribution = .fill
+        view.alignment = .center
+        return view
     }()
     
     //MARK: Method
@@ -59,7 +63,7 @@ class ViewController: UIViewController {
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100)
         }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableHeaderView = headerView
@@ -67,42 +71,57 @@ class ViewController: UIViewController {
         tableView.register(BeerInfoTableViewCell.self, forCellReuseIdentifier: BeerInfoTableViewCell.reuseIdentifier)
     }
     
-    func toolBarConfig() {
-        let fixed = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixed.width = 20
-//        let refreshButton = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: self, action: #selector(refreshBeer(_:)))
-        
-        let button = UIButton()
-        button.layer.borderWidth = 5
-        button.layer.cornerRadius = 5
-        button.layer.borderColor = UIColor.systemTeal.cgColor
-        button.tintColor = .systemTeal
-        button.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
+    func footerViewConfig() {
+        view.addSubview(footerView)
+        footerView.snp.makeConstraints { make in
+            make.top.equalTo(tableView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        button.addTarget(self, action: #selector(refreshBeer(_:)), for: .touchUpInside)
-        button.setImage(UIImage(systemName: "arrow.triangle.2.circlepath"), for: .normal)
+
+        let refreshButton = UIButton()
+        refreshButton.layer.borderWidth = 2
+        refreshButton.layer.cornerRadius = 5
+        refreshButton.layer.borderColor = UIColor.systemTeal.cgColor
+        refreshButton.tintColor = .systemTeal
+        refreshButton.addTarget(self, action: #selector(refreshBeer(_:)), for: .touchUpInside)
+        refreshButton.setImage(UIImage(systemName: "arrow.triangle.2.circlepath"), for: .normal)
+        refreshButton.setContentHuggingPriority(.required, for: .horizontal)
         
-        let buttonForShare = UIButton()
-        buttonForShare.layer.borderWidth = 5
-        buttonForShare.layer.cornerRadius = 10
-        buttonForShare.layer.borderColor = UIColor.systemTeal.cgColor
-        buttonForShare.tintColor = .white
-        buttonForShare.snp.makeConstraints { make in
-            make.height.equalTo(50)
+        let leadingPadding = UIView()
+        
+        leadingPadding.snp.makeConstraints { make in
+            make.width.equalTo(0)
         }
-        buttonForShare.addTarget(self, action: #selector(shareButtonClicked(_:)), for: .touchUpInside)
-        buttonForShare.setTitle("Share", for: .normal)
         
+        let shareButton = UIButton()
+        shareButton.layer.borderWidth = 2
+        shareButton.layer.cornerRadius = 5
+        shareButton.layer.borderColor = UIColor.systemTeal.cgColor
+        shareButton.tintColor = .systemTeal
+        shareButton.addTarget(self, action: #selector(shareButtonClicked(_:)), for: .touchUpInside)
+        shareButton.setTitle("Share Beer", for: .normal)
+        shareButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        shareButton.backgroundColor = .systemTeal
         
-        let refreshButton = UIBarButtonItem(customView: button)
+        let trailingPadding = UIView()
         
+        trailingPadding.snp.makeConstraints { make in
+            make.width.equalTo(0)
+        }
         
-        let space = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        space.width = 10
-        let shareButton = UIBarButtonItem(customView: buttonForShare)
+        footerView.addArrangedSubview(leadingPadding)
+        footerView.addArrangedSubview(refreshButton)
+        refreshButton.snp.makeConstraints { make in
+            make.height.equalTo(60)
+            make.width.equalTo(60)
+        }
         
-        footerBar.setItems([fixed, refreshButton, space, shareButton], animated: false)
+        footerView.addArrangedSubview(shareButton)
+        shareButton.snp.makeConstraints { make in
+            make.height.equalTo(60)
+        }
+        footerView.addArrangedSubview(trailingPadding)
     }
     
     func fetchRandomBeer() {
@@ -141,17 +160,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(#function)
-        toolBarConfig()
+        view.backgroundColor = .systemBackground
         tableViewConfig()
+        footerViewConfig()
         fetchRandomBeer()
         
-        view.addSubview(footerBar)
-        footerBar.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(80)
-        }
     }
 }
 
@@ -192,9 +205,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BeerInfoTableViewCell.reuseIdentifier, for: indexPath) as? BeerInfoTableViewCell else {
                 return UITableViewCell()
             }
+            cell.pairingFoodLabel.numberOfLines = 0
             data.pairingFood.forEach({
                 cell.pairingFoodLabel.text! += $0 + "\n"
             })
+            
             cell.tipsLabel.text = data.tips
             cell.tipsLabel.numberOfLines = 0
             

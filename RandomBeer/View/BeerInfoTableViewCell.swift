@@ -52,6 +52,11 @@ class BeerInfoTableViewCell: UITableViewCell {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pairingFoodLabel.text = ""
+    }
+    
     func createView() {
         self.addSubview(containerView)
         containerView.addSubview(foodTitleLabel)
