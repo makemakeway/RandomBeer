@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     var model = [BeerModel]()
     
+    var beerInfo: BeerModel?
+    
     var spread = false
     
     //MARK: UI
@@ -52,6 +54,60 @@ class ViewController: UIViewController {
     
     @objc func shareButtonClicked(_ sender: UIBarButtonItem) {
         print("share")
+        createJson()
+        var urlPaths = [URL]()
+        if let path = documentDirectoryPath() {
+            let json = (path as NSString).appendingPathComponent("beerInfo.json")
+            if FileManager.default.fileExists(atPath: json) {
+                urlPaths.append(URL(string: json)!)
+            } else {
+                print("저장할 데이터가 없습니다")
+            }
+        }
+        presentActivityViewController()
+    }
+    
+    func presentActivityViewController() {
+        let fileName = (documentDirectoryPath()! as NSString).appendingPathComponent("beerInfo.json")
+        let fileURL = URL(fileURLWithPath: fileName)
+        let vc = UIActivityViewController(activityItems: [fileURL], applicationActivities: [])
+        self.present(vc, animated: true, completion:  nil)
+    }
+    
+    func documentDirectoryPath() -> String? {
+        let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let path = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+        
+        if let directory = path.first {
+            return directory
+        } else {
+            return nil
+        }
+    }
+    
+    func createJson() {
+        guard let beerInfo = beerInfo else {
+            return
+        }
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        encoder.dateEncodingStrategy = .iso8601
+        
+        do {
+            let json = try encoder.encode(beerInfo)
+            guard let jsonString = String(data: json, encoding: .utf8) else { return }
+            guard let documentDirectory = FileManager.default.urls(for: .documentDirectory,
+                                                                      in: .userDomainMask).first else { return }
+            let jsonFilePath = documentDirectory.appendingPathComponent("beerInfo.json")
+            
+            try jsonString.write(to: jsonFilePath, atomically: true, encoding: .utf8)
+            
+        } catch {
+            print("ERROR")
+        }
+        
     }
     
     func tableViewConfig() {
@@ -59,12 +115,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-100)
-        }
+        tableView.frame = view.bounds
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableHeaderView = headerView
         tableView.register(OverViewTableViewCell.self, forCellReuseIdentifier: OverViewTableViewCell.reuseIdentifier)
@@ -74,9 +125,8 @@ class ViewController: UIViewController {
     func footerViewConfig() {
         view.addSubview(footerView)
         footerView.snp.makeConstraints { make in
-            make.top.equalTo(tableView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(100)
         }
 
         let refreshButton = UIButton()
@@ -133,6 +183,7 @@ class ViewController: UIViewController {
             case .success(let value):
                 print(value)
                 self.model = value
+                self.beerInfo = value.first!
                 if let url = self.model.first?.imageUrl {
                     AF.request(url).responseData { data in
                         
@@ -222,12 +273,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0, 1:
-            return UITableView.automaticDimension
-        default:
-            return 50
-        }
+        
+        return UITableView.automaticDimension
     }
 }
 
